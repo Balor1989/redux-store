@@ -1,3 +1,6 @@
+import { connect } from "react-redux/es/exports";
+import { inc, dec, random } from "./actions";
+
 const Counter = ({ counter, inc, dec, random }) => {
   return (
     <div className="container">
@@ -15,4 +18,15 @@ const Counter = ({ counter, inc, dec, random }) => {
   );
 };
 
-export default Counter;
+const mapStateToProps = (state) => {
+  return { counter: state };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    inc: () => dispatch(inc()),
+    dec: () => dispatch(dec()),
+    random: () => dispatch(random()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
