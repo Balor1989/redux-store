@@ -6,13 +6,6 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Counter from "./counter";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <Counter />
-  </React.StrictMode>
-);
-
 const store = createStore(reducer);
 const { dispatch } = store;
 
@@ -28,17 +21,23 @@ const { dispatch } = store;
 
 const { inc, dec, random } = bindActionCreators(actions, dispatch);
 
-document.querySelector(".inc").addEventListener("click", inc);
-
-document.querySelector(".dec").addEventListener("click", dec);
-
-document.querySelector(".random").addEventListener("click", () => {
-  const payload = Math.floor(Math.random() * 10);
-  random(payload);
-});
-
 const update = () => {
-  document.querySelector(".counter").innerHTML = store.getState();
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <Counter
+        counter={store.getState()}
+        inc={inc}
+        dec={dec}
+        random={() => {
+          const value = Math.floor(Math.random() + 10);
+          random(value);
+        }}
+      />
+    </React.StrictMode>
+  );
 };
-
+update();
 store.subscribe(update);
+
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(<React.StrictMode></React.StrictMode>);
