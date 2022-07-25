@@ -1,5 +1,15 @@
+import ErrorBoundary from "./Components/ErrorBoundary";
+import ErrorMessage from "./Components/ErrorMessage";
+import Spinner from "./Components/Spinner";
+
 const App = () => {
-  return <h1>Hello!</h1>;
+  return (
+    <>
+      <ErrorBoundary />
+      <ErrorMessage />
+      <Spinner />
+    </>
+  );
 };
 
 export default App;
