@@ -1,17 +1,14 @@
-import ErrorBoundary from "./Components/ErrorBoundary";
-import ErrorMessage from "./Components/ErrorMessage";
-import Spinner from "./Components/Spinner";
-import withStoreService from "./Service/hoc/withStoreService";
+import { Routes, Route } from "react-router-dom";
+import CardPage from "./Views/CardPage";
+import HomePage from "./Views/HomePage";
 
-const App = ({ storeService }) => {
-  console.log(storeService.getBooks());
+const App = () => {
   return (
-    <>
-      <ErrorBoundary />
-      <ErrorMessage />
-      <Spinner />
-    </>
+    <Routes>
+      <Route exact path="/" element={<HomePage />} />
+      <Route path="/cards" element={<CardPage />} />
+    </Routes>
   );
 };
 
-export default withStoreService()(App);
+export default App;
