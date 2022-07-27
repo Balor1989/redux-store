@@ -1,0 +1,37 @@
+.headerContainer {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: Georgia, sans-serif;
+  font-size: 35px;
+  color: #198754;
+  transition: color 250ms ease;
+}
+
+.cart {
+  font-family: Georgia, sans-serif;
+  text-decoration: none;
+  align-self: center;
+  font-size: 22px;
+  color: #198754;
+  transition: color 250ms ease;
+}
+
+.icon {
+  font-size: 30px;
+  color: rgb(152, 207, 138);
+  margin-right: 10px;
+  transition: color 250ms ease;
+}
+
+.logo:hover,
+.logo:focus,
+.cart:hover,
+.cart:hover .icon,
+.cart:focus .icon {
+  color: rgb(24, 102, 65);
+}
