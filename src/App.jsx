@@ -7,7 +7,7 @@ import Header from "./Components/Header";
 const App = () => {
   return (
     <>
-      <Header />
+      <Header items={3} total={50} />
       <main className={`${s.mainContainer} container`}>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
