@@ -3,6 +3,7 @@ import CartPage from "./Views/CartPage";
 import HomePage from "./Views/HomePage";
 import s from "./App.module.css";
 import Header from "./Components/Header";
+import CartTable from "./Components/CartTable";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/cart" element={<CartPage />} />
         </Routes>
       </main>
+      <CartTable />
     </>
   );
 };
