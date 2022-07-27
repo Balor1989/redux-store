@@ -1,0 +1,38 @@
+.listItem {
+  display: flex;
+  margin: 15px 0;
+}
+
+.bookImage {
+  width: 120px;
+  margin-right: 30px;
+}
+
+.bookDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  align-items: flex-start;
+}
+
+.title {
+  color: #198754;
+  font-size: 20px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.author {
+  font-size: 20px;
+}
+
+.price {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.price,
+.title,
+.author {
+  margin-bottom: 10px;
+}

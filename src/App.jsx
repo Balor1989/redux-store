@@ -1,15 +1,20 @@
 import { Routes, Route } from "react-router-dom";
-import CardPage from "./Views/CartPage";
+import CartPage from "./Views/CartPage";
 import HomePage from "./Views/HomePage";
+import s from "./App.module.css";
+import Header from "./Components/Header";
 
 const App = () => {
   return (
-    <main className="container">
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route path="/cards" element={<CardPage />} />
-      </Routes>
-    </main>
+    <>
+      <Header />
+      <main className={`${s.mainContainer} container`}>
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </main>
+    </>
   );
 };
 
