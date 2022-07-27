@@ -2,12 +2,13 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import BookListItem from "../BookListItem";
 import withStoreService from "../../Service/hoc/withStoreService";
-import { booksLoaded } from "../../Redux/actions";
+import { booksLoaded, booksRequested } from "../../Redux/actions";
 import Spinner from "../Spinner/Spinner";
 
 class BookList extends Component {
   getData = async () => {
-    const { storeService, booksLoaded } = this.props;
+    const { storeService, booksLoaded, booksRequested } = this.props;
+    booksRequested();
     const data = await storeService.getBooks();
     booksLoaded(data);
   };
@@ -50,6 +51,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     booksLoaded: (newBooks) => {
       dispatch(booksLoaded(newBooks));
+    },
+    booksRequested: () => {
+      dispatch(booksRequested());
     },
   };
 };
