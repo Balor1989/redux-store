@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import CardPage from "./Views/CardPage";
+import CardPage from "./Views/CartPage";
 import HomePage from "./Views/HomePage";
 
 const App = () => {
