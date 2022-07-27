@@ -5,7 +5,7 @@ const CartTable = () => {
   return (
     <footer className={`${s.cartTable} container`}>
       <h2 className={s.title}>Your Order</h2>
-      <table className="table text-align-center">
+      <table className="table table-hover align-middle">
         <thead>
           <th>#</th>
           <th>Item</th>
@@ -20,7 +20,7 @@ const CartTable = () => {
             <td>Site Reliability Engineering</td>
             <td>2</td>
             <td>$40</td>
-            <td>
+            <td className="d-md-flex justify-content-md-end">
               <button className="btn btn-outline-danger btn-sm">
                 <FaTrashAlt />
               </button>
