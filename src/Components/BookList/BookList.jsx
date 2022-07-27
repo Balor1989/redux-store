@@ -3,26 +3,37 @@ import { connect } from "react-redux";
 import BookListItem from "../BookListItem";
 import withStoreService from "../../Service/hoc/withStoreService";
 import { booksLoaded } from "../../Redux/actions";
+import Spinner from "../Spinner/Spinner";
 
 class BookList extends Component {
+  getData = async () => {
+    const { storeService, booksLoaded } = this.props;
+    const data = await storeService.getBooks();
+    booksLoaded(data);
+  };
+
   componentDidMount() {
-    const { storeService } = this.props;
-    const data = storeService.getBooks();
-    this.props.booksLoaded(data);
+    this.getData();
   }
 
   render() {
-    const { books } = this.props;
+    const { books, loading, visible } = this.props;
+
     return (
-      <ul className="list-group">
-        {books.map((book) => {
-          return (
-            <li key={book.id}>
-              <BookListItem book={book} />
-            </li>
-          );
-        })}
-      </ul>
+      <>
+        {loading && <Spinner />}
+        {visible && (
+          <ul className="list-group">
+            {books.map((book) => {
+              return (
+                <li key={book.id}>
+                  <BookListItem book={book} />
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </>
     );
   }
 }
@@ -30,6 +41,8 @@ class BookList extends Component {
 const mapStateToprops = (state) => {
   return {
     books: state.books,
+    loading: state.loading,
+    visible: state.visible,
   };
 };
 

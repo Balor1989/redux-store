@@ -7,11 +7,13 @@ const CartTable = () => {
       <h2 className={s.title}>Your Order</h2>
       <table className="table table-hover align-middle">
         <thead>
-          <th>#</th>
-          <th>Item</th>
-          <th>Count</th>
-          <th>Price</th>
-          <th>Action</th>
+          <tr>
+            <th>#</th>
+            <th>Item</th>
+            <th>Count</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
         </thead>
 
         <tbody>
