@@ -1,6 +1,15 @@
 class BookService {
   getBooks() {
-    return [];
+    return [
+      {
+        id: 1,
+        title: "first book",
+      },
+      {
+        id: 2,
+        title: "second book",
+      },
+    ];
   }
 }
 
