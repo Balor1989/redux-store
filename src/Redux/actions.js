@@ -20,6 +20,13 @@ const booksError = (error) => {
   };
 };
 
+const bookAddedToCart = (bookId) => {
+  return {
+    type: TYPE.BOOK_ADD,
+    payload: bookId,
+  };
+};
+
 const getData = (storeService, dispatch) => async () => {
   try {
     dispatch(booksRequested());
@@ -30,4 +37,4 @@ const getData = (storeService, dispatch) => async () => {
   }
 };
 
-export { getData };
+export { getData, bookAddedToCart };
