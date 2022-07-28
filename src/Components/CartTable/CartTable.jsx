@@ -10,7 +10,7 @@ const CartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
         <td>{idx + 1}</td>
         <td>{title}</td>
         <td>{count}</td>
-        <td>$ {price}</td>
+        <td>$ {price.toFixed(2)}</td>
         <td className="d-md-flex justify-content-md-end">
           <button
             className="btn btn-outline-danger btn-sm"
