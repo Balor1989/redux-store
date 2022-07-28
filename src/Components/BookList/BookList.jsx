@@ -2,15 +2,21 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import BookListItem from "../BookListItem";
 import withStoreService from "../../Service/hoc/withStoreService";
-import { booksLoaded, booksRequested } from "../../Redux/actions";
+import { booksLoaded, booksRequested, booksError } from "../../Redux/actions";
 import Spinner from "../Spinner/Spinner";
+import ErrorMessage from "../ErrorMessage/";
 
 class BookList extends Component {
   getData = async () => {
-    const { storeService, booksLoaded, booksRequested } = this.props;
-    booksRequested();
-    const data = await storeService.getBooks();
-    booksLoaded(data);
+    const { storeService, booksLoaded, booksRequested, booksError } =
+      this.props;
+    try {
+      booksRequested();
+      const data = await storeService.getBooks();
+      booksLoaded(data);
+    } catch (error) {
+      booksError(error);
+    }
   };
 
   componentDidMount() {
@@ -18,10 +24,11 @@ class BookList extends Component {
   }
 
   render() {
-    const { books, loading, visible } = this.props;
+    const { books, loading, visible, error } = this.props;
 
     return (
       <>
+        {error && <ErrorMessage />}
         {loading && <Spinner />}
         {visible && (
           <ul className="list-group">
@@ -44,6 +51,7 @@ const mapStateToprops = (state) => {
     books: state.books,
     loading: state.loading,
     visible: state.visible,
+    error: state.error,
   };
 };
 
@@ -54,6 +62,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     booksRequested: () => {
       dispatch(booksRequested());
+    },
+    booksError: (error) => {
+      dispatch(booksError(error));
     },
   };
 };
