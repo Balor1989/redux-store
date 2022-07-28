@@ -7,20 +7,8 @@ import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../ErrorMessage/";
 
 class BookList extends Component {
-  getData = async () => {
-    const { storeService, booksLoaded, booksRequested, booksError } =
-      this.props;
-    try {
-      booksRequested();
-      const data = await storeService.getBooks();
-      booksLoaded(data);
-    } catch (error) {
-      booksError(error);
-    }
-  };
-
   componentDidMount() {
-    this.getData();
+    this.props.getData();
   }
 
   render() {
@@ -55,16 +43,17 @@ const mapStateToprops = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { storeService } = ownProps;
   return {
-    booksLoaded: (newBooks) => {
-      dispatch(booksLoaded(newBooks));
-    },
-    booksRequested: () => {
-      dispatch(booksRequested());
-    },
-    booksError: (error) => {
-      dispatch(booksError(error));
+    getData: async () => {
+      try {
+        dispatch(booksRequested());
+        const data = await storeService.getBooks();
+        dispatch(booksLoaded(data));
+      } catch (error) {
+        dispatch(booksError(error));
+      }
     },
   };
 };
