@@ -1,3 +1,5 @@
+import TYPE from "./types";
+
 const initialState = {
   books: [],
   visible: false,
@@ -7,21 +9,21 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "BOOKS_REQUESTED":
+    case TYPE.REQUEST:
       return {
         books: [],
         loading: true,
         visible: false,
         error: null,
       };
-    case "BOOKS_LOADED":
+    case TYPE.SUCCEESS:
       return {
         books: action.payload,
         loading: false,
         visible: true,
         error: null,
       };
-    case "BOOKS_ERROR":
+    case TYPE.FAILRUE:
       return {
         books: [],
         loading: false,

@@ -2,7 +2,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import BookListItem from "../BookListItem";
 import withStoreService from "../../Service/hoc/withStoreService";
-import { booksLoaded, booksRequested, booksError } from "../../Redux/actions";
+import { getData } from "../../Redux/actions";
 import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../ErrorMessage/";
 
@@ -46,15 +46,7 @@ const mapStateToprops = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { storeService } = ownProps;
   return {
-    getData: async () => {
-      try {
-        dispatch(booksRequested());
-        const data = await storeService.getBooks();
-        dispatch(booksLoaded(data));
-      } catch (error) {
-        dispatch(booksError(error));
-      }
-    },
+    getData: getData(storeService, dispatch),
   };
 };
 
