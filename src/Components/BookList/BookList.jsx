@@ -6,7 +6,21 @@ import { getData } from "../../Redux/actions";
 import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../ErrorMessage/";
 
-class BookList extends Component {
+const BookList = ({ books }) => {
+  return (
+    <ul className="list-group">
+      {books.map((book) => {
+        return (
+          <li key={book.id}>
+            <BookListItem book={book} />
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+class BookListContainer extends Component {
   componentDidMount() {
     this.props.getData();
   }
@@ -18,17 +32,7 @@ class BookList extends Component {
       <>
         {error && <ErrorMessage />}
         {loading && <Spinner />}
-        {visible && (
-          <ul className="list-group">
-            {books.map((book) => {
-              return (
-                <li key={book.id}>
-                  <BookListItem book={book} />
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        {visible && <BookList books={books} />}
       </>
     );
   }
@@ -51,5 +55,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 };
 
 export default withStoreService()(
-  connect(mapStateToprops, mapDispatchToProps)(BookList)
+  connect(mapStateToprops, mapDispatchToProps)(BookListContainer)
 );
