@@ -26,6 +26,18 @@ const bookAddedToCart = (bookId) => {
     payload: bookId,
   };
 };
+const bookRemoveFromCart = (bookId) => {
+  return {
+    type: TYPE.BOOK_REMOVE,
+    payload: bookId,
+  };
+};
+const allBookRemoveFromCart = (bookId) => {
+  return {
+    type: TYPE.ALL_BOOK_REMOVE,
+    payload: bookId,
+  };
+};
 
 const getData = (storeService, dispatch) => async () => {
   try {
@@ -37,4 +49,4 @@ const getData = (storeService, dispatch) => async () => {
   }
 };
 
-export { getData, bookAddedToCart };
+export { getData, bookAddedToCart, bookRemoveFromCart, allBookRemoveFromCart };

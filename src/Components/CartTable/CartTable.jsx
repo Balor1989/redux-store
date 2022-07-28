@@ -1,6 +1,11 @@
 import s from "./CartTable.module.css";
 import { FaTrashAlt, FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { connect } from "react-redux";
+import {
+  allBookRemoveFromCart,
+  bookAddedToCart,
+  bookRemoveFromCart,
+} from "../../Redux/actions";
 
 const CartTable = ({ items, total, onIncrease, onDecrease, onDelete }) => {
   const renderTableItem = (item, idx) => {
@@ -64,18 +69,10 @@ const mapStateToProps = ({ items, orderTotal }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onDelete: () => {
-      console.log("Delete");
-    },
-    onIncrease: () => {
-      console.log("+");
-    },
-    onDecrease: () => {
-      console.log("-");
-    },
-  };
+const mapDispatchToProps = {
+  onDelete: allBookRemoveFromCart,
+  onIncrease: bookAddedToCart,
+  onDecrease: bookRemoveFromCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartTable);
