@@ -1,13 +1,4 @@
-import TYPE from "./types";
-
-const initialState = {
-  books: [],
-  visible: false,
-  loading: true,
-  error: null,
-  items: [],
-  orderTotal: 220,
-};
+import TYPE from "../types";
 
 const updateCartItems = (items, item, idx) => {
   if (item.count === 0) {
@@ -33,53 +24,35 @@ const updateCartItem = (book, item = {}, quantity) => {
 };
 
 const updateOrder = (state, bookId, quantity) => {
-  const { books, items } = state;
+  const {
+    bookList: { books },
+    cart: { items },
+  } = state;
   const book = books.find(({ id }) => id === bookId);
   const itemIndex = items.findIndex(({ id }) => id === bookId);
   const item = items[itemIndex];
   const newItem = updateCartItem(book, item, quantity);
   return {
-    ...state,
+    total: 0,
     items: updateCartItems(items, newItem, itemIndex),
   };
 };
 
-const reducer = (state = initialState, action) => {
+const updareCart = (state, action) => {
+  if (state === undefined) {
+    return { items: [], orderTotal: 0 };
+  }
   switch (action.type) {
-    case TYPE.REQUEST:
-      return {
-        ...state,
-        books: [],
-        loading: true,
-        visible: false,
-        error: null,
-      };
-    case TYPE.SUCCEESS:
-      return {
-        ...state,
-        books: action.payload,
-        loading: false,
-        visible: true,
-        error: null,
-      };
-    case TYPE.FAILRUE:
-      return {
-        ...state,
-        books: [],
-        loading: false,
-        visible: true,
-        error: action.payload,
-      };
     case TYPE.BOOK_ADD:
       return updateOrder(state, action.payload, 1);
     case TYPE.BOOK_REMOVE:
       return updateOrder(state, action.payload, -1);
     case TYPE.ALL_BOOK_REMOVE:
-      const item = state.items.find(({ id }) => id === action.payload);
+      const item = state.cart.items.find(({ id }) => id === action.payload);
       return updateOrder(state, action.payload, -item.count);
     default:
-      return state;
+      return state.cart;
   }
 };
 
-export default reducer;
+export default updareCart;
